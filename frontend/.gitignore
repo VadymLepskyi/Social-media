@@ -1,0 +1,21 @@
+
+# =========================
+# React + TypeScript
+# =========================
+node_modules/
+dist/
+build/
+.cache/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
