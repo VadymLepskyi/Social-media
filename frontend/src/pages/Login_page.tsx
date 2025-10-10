@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import keycloak from "./keycloak";
+import keycloak from "../keycloak";
 
-function App() {
+export default function LoginPage() {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
@@ -27,5 +27,5 @@ return(
 
 }
 
-export default App;
+
 
