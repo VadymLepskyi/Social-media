@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 keycloak.init({onLoad:"login-required"}).then(authenticated =>{
   if(authenticated)
   {
+    // console.log("Token: ", keycloak.token);
     root.render(
        <React.StrictMode>
         <App/>
@@ -20,6 +21,8 @@ keycloak.init({onLoad:"login-required"}).then(authenticated =>{
     keycloak.login();
   }
   }).catch(error=>console.error("Keycloak initilize error", error))
+
+
 
 function App(){
   return(
