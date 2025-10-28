@@ -1,4 +1,13 @@
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+// PostgreSQL provider
+var connectionString = "Host=localhost;Port=5432;Database=socialMediaDatabase;Username=keycloak;Password=keycloak";
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
+/// The authentication srvice: Keycloak
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
