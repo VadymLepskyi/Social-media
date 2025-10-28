@@ -1,6 +1,6 @@
-using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-
+using backend.Infrastructure.Data;
+ 
 var builder = WebApplication.CreateBuilder(args);
 // PostgreSQL provider
 var connectionString = "Host=localhost;Port=5432;Database=socialMediaDatabase;Username=keycloak;Password=keycloak";
@@ -23,3 +23,5 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 app.Run();
+
+

@@ -15,7 +15,7 @@ namespace backend.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Username = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     SkillLevel = table.Column<int>(type: "integer", nullable: false),
                     ProfilePhotoUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
