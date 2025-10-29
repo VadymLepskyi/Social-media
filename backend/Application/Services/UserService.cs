@@ -9,7 +9,7 @@ namespace backend.Applications.Services
     {
         private readonly AppDbContext _context;
         public UserService(AppDbContext context) => _context = context;
-        public async Task<User> GetUserByIdAsync(string id) => await _context.Users.FindAsync();
+        public async Task<User?> GetUserByIdAsync(string id) => await _context.Users.FindAsync();
         public async Task<List<User>> GetAllUsersAsync() => await _context.Users.ToListAsync();
         public async Task<User> CreateUserAsync(User user)
         {

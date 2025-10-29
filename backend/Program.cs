@@ -11,7 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "http://localhost:8080/realms/MyProjectRealm";
+        options.Authority = "http://localhost:8080/realms/Padel_Realm";
         options.Audience = "account";
         options.RequireHttpsMetadata = false;
     });
