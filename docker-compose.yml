@@ -4,8 +4,8 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
+      POSTGRES_USER: mypassword
+      POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: socialMediaDatabase
     ports:
       - "5432:5432"
@@ -37,6 +37,7 @@ services:
       - "8080:8080"
     depends_on:
       - keycloak-db
+     
 
   minio:
     image: minio/minio:latest
