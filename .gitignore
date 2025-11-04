@@ -1,3 +1,17 @@
+# =========================
+# Frontend ignored files
+# =========================
+
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.cache/
+frontend/coverage/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/*.tsbuildinfo
 
 # =========================
 # Docker
