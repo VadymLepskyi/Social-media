@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: mypassword
+      POSTGRES_USER: padel_user
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: socialMediaDatabase
     ports:
@@ -22,6 +22,7 @@ services:
       - "5433:5432"
     volumes:
       - keycloak_postgres_data:/var/lib/postgresql/data
+   
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.0.5
@@ -33,10 +34,12 @@ services:
       KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloakdb
       KC_DB_USERNAME: keycloak_user
       KC_DB_PASSWORD: mypassword
+     
     ports:
       - "8080:8080"
     depends_on:
       - keycloak-db
+
      
 
   minio:

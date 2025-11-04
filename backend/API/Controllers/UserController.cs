@@ -22,28 +22,38 @@ namespace backend.API.Controllers
         [HttpPost("sync")]
         public async Task<IActionResult> SyncUser()
         {
-            var keycloakUserId = User.FindFirst("sub")?.Value;
-            var username = User.FindFirst("preferred_username")?.Value;
-
-            if (keycloakUserId == null)
-                return BadRequest("Missing Keycloak user ID.");
-
-            var user = await _context.Users.FindAsync(keycloakUserId);
-
-            if (user == null)
+            try
             {
-                user = new User
+                // User refers to the currently authenticated user provided by ASP.NET Core.
+                var keycloakUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var username = User.FindFirst("preferred_username")?.Value;
+
+                if (keycloakUserId == null)
+                    return BadRequest("Missing Keycloak user ID.");
+                // It represents the whole collection (table) of users in the database.
+                var user = await _context.Users.FindAsync(keycloakUserId);
+
+                if (user == null)
                 {
-                    Id = keycloakUserId,
-                    Username = username,
-                    CreatedAt = DateTime.UtcNow
-                };
+                    user = new User
+                    {
+                        Id = keycloakUserId,
+                        Username = username,
+                        CreatedAt = DateTime.UtcNow
+                    };
 
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync();
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
+                }
+
+                return Ok(user);
             }
-
-            return Ok(user);
+            catch(Exception ex)
+            {
+                Console.WriteLine($"SyncUser:{ex}");
+                return BadRequest($"Error: {ex.Message}");
+            }
+            
         }
     }
 }

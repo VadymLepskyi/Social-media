@@ -6,10 +6,20 @@ import HomePage from './pages/HomePage';
 import keycloak from './keycloak';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-keycloak.init({onLoad:"login-required"}).then(authenticated =>{
+keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
   if(authenticated)
   {
-    // console.log("Token: ", keycloak.token);
+    console.log("Keycloak token:", keycloak.token);
+    console.log("Token expiration:", keycloak.tokenParsed?.exp);
+
+    const token= keycloak.token
+    await fetch("http://localhost:5145/api/users/sync", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${keycloak.token}`,
+          },
+        });
+
     root.render(
        <React.StrictMode>
         <App/>
