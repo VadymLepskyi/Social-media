@@ -5,6 +5,8 @@ import './index.css';
 import HomePage from './pages/HomePage';
 import keycloak from './keycloak';
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
   if(authenticated)
