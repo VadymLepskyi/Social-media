@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage'
+import CommunityPage from './pages/CommunityPage'
 import EditProfilePage  from './pages/EditProfilePage';
 import NavigationBar from './components/navigationBar';
 import keycloak from './keycloak';
@@ -43,8 +45,10 @@ function App(){
     <BrowserRouter>
         <NavigationBar/>
         <Routes>
+          <Route path="/" element={<HomePage/>}/>
+          <Route path="/profile" element={<ProfilePage/>}/>
           <Route path="edit/profile" element={<EditProfilePage/>}/>
-          {/* <Route path="/" element={<HomePage/>}/> */}
+          <Route path="/community" element={<CommunityPage/>}/>
         </Routes>
     </BrowserRouter>
   );
