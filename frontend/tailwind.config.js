@@ -8,6 +8,9 @@ module.exports = {
         'padel-accent': '#10b981',
         'padel-light': '#f8fafc',
       },
+      fontFamily: {
+        Inter: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],

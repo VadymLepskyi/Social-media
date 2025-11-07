@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import HomePage from './pages/HomePage';
+import EditProfilePage  from './pages/EditProfilePage';
+import NavigationBar from './components/navigationBar';
 import keycloak from './keycloak';
 
 
@@ -39,9 +41,10 @@ keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
 function App(){
   return(
     <BrowserRouter>
+        <NavigationBar/>
         <Routes>
-          {/* <Route path="/" element={<LoginPage/>}/> */}
-          <Route path="/" element={<HomePage/>}/>
+          <Route path="edit/profile" element={<EditProfilePage/>}/>
+          {/* <Route path="/" element={<HomePage/>}/> */}
         </Routes>
     </BrowserRouter>
   );
