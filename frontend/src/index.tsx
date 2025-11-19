@@ -47,7 +47,7 @@ function App(){
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/profile" element={<ProfilePage/>}/>
-          <Route path="edit/profile" element={<EditProfilePage/>}/>
+          <Route path="profile/edit" element={<EditProfilePage/>}/>
           <Route path="/community" element={<CommunityPage/>}/>
         </Routes>
     </BrowserRouter>

@@ -7,9 +7,10 @@ export default function Navigationar()
 {
     const navigate=useNavigate();
     return(
+        <header className="bg-padel-primary shadow-lg sticky top-0 z-10">
             <div className="p-3 flex items-center bg-padel-primary justify-between">
                 <div className="flex items-center">
-                    <img
+                    <img 
                         className="mx-10 w-14 sm:w-22 lg:w-38 mr-4 cursor-pointer" 
                         src={padelBall}
                         alt="Padel Ball" 
@@ -34,5 +35,6 @@ export default function Navigationar()
                         </Link>
                 </div>
             </div>
+            </header>
         );
 }
