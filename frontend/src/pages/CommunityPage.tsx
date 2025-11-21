@@ -1,4 +1,4 @@
-import EditProfilePage from "./EditProfilePage";
+import EditProfilePage from "./EditorProfilePage";
 
 export default function Profile()
 {

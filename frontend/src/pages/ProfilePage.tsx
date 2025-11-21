@@ -1,4 +1,4 @@
-import EditProfilePage from "./EditProfilePage";
+import EditProfilePage from "./EditorProfilePage";
 import {useNavigate} from "react-router-dom"
 
 export default function Profile()

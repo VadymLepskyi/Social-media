@@ -5,7 +5,7 @@ import './index.css';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage'
 import CommunityPage from './pages/CommunityPage'
-import EditProfilePage  from './pages/EditProfilePage';
+import EditProfilePage  from './pages/EditorProfilePage';
 import NavigationBar from './components/navigationBar';
 import keycloak from './keycloak';
 
@@ -37,8 +37,6 @@ keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
     keycloak.login();
   }
   }).catch(error=>console.error("Keycloak initilize error", error))
-
-
 
 function App(){
   return(

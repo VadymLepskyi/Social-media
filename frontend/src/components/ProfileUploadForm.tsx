@@ -3,9 +3,8 @@ interface UploadFormProp{
 }
 export default function UploadForm({ handleSubmit }: UploadFormProp) {
     return(
-        <>
-        {/* Personal Details Section  */}
             <form className="space-y-6" onSubmit={handleSubmit}>
+                {/* Personal Details Section  */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
                         <label htmlFor="name"  className="block text-sm font-medium text-padel-primary mb-1">Full Name</label>
@@ -50,7 +49,5 @@ export default function UploadForm({ handleSubmit }: UploadFormProp) {
                     </button>
                 </div>
             </form>
-            </>
     );
-
 }

@@ -9,22 +9,33 @@ namespace backend.Infrastructure.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) :
            base(options)
            {}
-   
-        public DbSet<User> Users { get; set; }
+        
+        public DbSet<UserProfile> UserProfiles {get;set;}
         protected override  void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
-            
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>(entity =>
+            // UserProfile table
+            modelBuilder.Entity<UserProfile>(entity =>
             {
                 entity.HasKey(u => u.Id);
-                entity.Property(u => u.Username).HasMaxLength(255);
-                entity.Property(u => u.SkillLevel).IsRequired();
+
+                entity.Property(u => u.KeycloakId)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(u => u.UserName).HasMaxLength(100);
+                entity.Property(u => u.City).HasMaxLength(100);
+                entity.Property(u => u.Bio).HasMaxLength(500);
+                entity.Property(u => u.SkillLevel).HasMaxLength(50);
                 entity.Property(u => u.ProfilePhotoUrl).HasMaxLength(255);
-                entity.Property(u => u.CreatedAt).HasDefaultValueSql("NOW()");
-                entity.Property(u => u.UpdatedAt).HasDefaultValueSql("NOW()");
+
+                entity.Property(u => u.CreatedAt)
+                    .HasDefaultValueSql("NOW()");
+
+                entity.Property(u => u.UpdatedAt)
+                    .HasDefaultValueSql("NOW()");
             });
         }
+        
     }
 }

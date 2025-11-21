@@ -21,7 +21,7 @@ return(
                             <img
                             src={avatarPreview}
                             alt="Profile Preview"
-                            style={{ width: "250px", marginTop: "10px" }}
+                            className="w-full h-full object-cover"
                             />
                     ):(<span className="text-gray-400 text-sm">No image</span>)}
                 </div>
