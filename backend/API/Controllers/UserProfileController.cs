@@ -1,5 +1,6 @@
 using backend.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using backend.Application.Interfaces;
 
 namespace backend.API.Controllers
 {
@@ -20,15 +21,26 @@ namespace backend.API.Controllers
             [FromForm] IFormFile? avatar
         )
         {
-            // You probably extract Keycloak ID from JWT:
-            var keycloakId = User.FindFirst("preferred_username")?.Value;
+            try
+            {
+                var keycloakId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                Console.WriteLine($"KeycloakId: {keycloakId}");
+                Console.WriteLine($"DTO Name: {dto?.Name}, City: {dto?.City}, Bio: {dto?.Bio}, Skill: {dto?.SkillLevel}");
+                Console.WriteLine($"Avatar file: {avatar?.FileName}");
 
-            if (keycloakId == null)
-                return Unauthorized();
+                if (keycloakId == null) return Unauthorized();
+                
+                if (dto == null)
+                    return BadRequest("Missing profile data");
+                var user = await _service.UpdateProfileAsync(keycloakId, dto, avatar);
 
-            var user = await _service.UpdateProfileAsync(keycloakId, dto, avatar);
-
-            return Ok(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"UpdateProfile Error: {ex}");
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

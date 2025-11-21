@@ -1,12 +1,15 @@
 using backend.Application.DTOs;
 using backend.Domain.Entities;
-public interface IUserProfileService
+namespace backend.Application.Interfaces
 {
-    Task<UserProfile?> GetByKeycloakIdAsync(string keycloakId);
+    public interface IUserProfileService
+    {
+        Task<UserProfile?> GetByKeycloakIdAsync(string keycloakId);
 
-    Task<UserProfile> UpdateProfileAsync(
-        string keycloakId,
-        UpdateUserProfileDto dto,
-        IFormFile? avatar
-    );
+        Task<UserProfile> UpdateProfileAsync(
+            string keycloakId,
+            UpdateUserProfileDto dto,
+            IFormFile? avatar
+        );
+    }
 }

@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Http;
 using Minio;
 using Minio.DataModel.Args;
 using Minio.Exceptions;
-
-namespace backend.Infrastructure.MinIO
+using backend.Application.Interfaces;
+namespace backend.Application.Services
 {
     public class FileStorageService : IFileStorageService
     {
@@ -54,3 +54,4 @@ namespace backend.Infrastructure.MinIO
         }
     }
 }
+

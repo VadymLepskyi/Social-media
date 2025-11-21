@@ -12,6 +12,7 @@ return(
                     
                     <input id="uploadInput" 
                         type="file"
+                        name="avatar"
                         accept="image/*"
                         style={{display:"none"}}
                         onChange={handleImageChange}
