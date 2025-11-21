@@ -1,4 +1,7 @@
-public interface IFileStorageService
+namespace backend.Application.Interfaces
 {
-    Task<string> UploadFileAsync(IFormFile file);
+    public interface IFileStorageService
+    {
+        Task<string> UploadFileAsync(IFormFile file);
+    }
 }
