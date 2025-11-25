@@ -1,5 +1,5 @@
-import UploadForm from "../components/ProfileUploadForm"
-import UploadAvatar from "../components/ProfileUploadAvatar"
+import UploadForm from "../components/profileUploadForm"
+import UploadAvatar from "../components/profileUploadAvatar"
 import {useState} from "react"
 import keycloak from "../keycloak"
 import {useNavigate} from "react-router-dom"
