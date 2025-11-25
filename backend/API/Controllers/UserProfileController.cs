@@ -42,5 +42,10 @@ namespace backend.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet("GetProfile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            return Ok(user)
+        }
     }
 }

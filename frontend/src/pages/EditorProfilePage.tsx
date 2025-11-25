@@ -1,11 +1,10 @@
 import UploadForm from "../components/profileUploadForm"
 import UploadAvatar from "../components/profileUploadAvatar"
 import {useState} from "react"
-import keycloak from "../keycloak"
-import {useNavigate} from "react-router-dom"
+import UseEditorProfile from "../hooks/useEditorProfile"
 export default function EditProfilePage()
 {
-    const navigate= useNavigate();
+    const { updateProfile } = UseEditorProfile();
     const [avatarFile, setAvatarFile]=useState<File|null>(null)
     const [avatarPreview, setAvatarPreview]=useState<string|null>(null)
     const handleImageChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -20,25 +19,8 @@ export default function EditProfilePage()
     if(avatarFile)
         formData.append("avatar", avatarFile)
     formData.forEach((key,value)=>{ console.log(key,value)})
-    updateEditPage(formData)
+    updateProfile(formData);
 };
-    const updateEditPage=async(formData:FormData)=>{try {
-        const res = await fetch("http://localhost:5145/api/UserProfile/updateProfile", {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${keycloak.token}`, // add Keycloak token
-            },
-            body: formData,
-        });
-        if (res.ok) {
-        navigate("/profile");
-        }   
-        if (!res.ok) throw new Error("Failed to update profile");
-        console.log("Profile updated successfully");
-    } catch (err) {
-        console.error(err);
-    }
-} 
     return(
     <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-extrabold text-padel-primary mb-6">Edit Your Profile</h2>

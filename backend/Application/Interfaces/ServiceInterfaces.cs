@@ -4,13 +4,13 @@ namespace backend.Application.Interfaces
 {
     public interface IUserProfileService
     {
-        Task<UserProfile?> GetByKeycloakIdAsync(string keycloakId);
-
+        Task<UserProfile?> PostUserByKeycloakIdAsync(string keycloakId);
         Task<UserProfile> UpdateProfileAsync(
             string keycloakId,
             UpdateUserProfileDto dto,
             IFormFile? avatar
         );
+
     }
     public interface IFileStorageService
     {
