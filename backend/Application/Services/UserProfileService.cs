@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using backend.Infrastructure.Data;
 using backend.Domain.Entities;
 using backend.Application.DTOs;
@@ -10,17 +9,18 @@ namespace backend.Application.Services
     {
         private readonly AppDbContext _context;
         private readonly IFileStorageService _fileService;
+        private readonly IUserProfileRepository _repository;
 
-        public UserProfileService(AppDbContext context, IFileStorageService fileService)
+        public UserProfileService(AppDbContext context, IFileStorageService fileService, IUserProfileRepository repository)
         {
             _context = context;
             _fileService = fileService;
-        }
+            _repository= repository;
+        } 
 
         public async Task<UserProfile?> GetByKeycloakIdAsync(string keycloakId)
         {
-            return await _context.UserProfiles
-                .FirstOrDefaultAsync(u => u.KeycloakId == keycloakId);
+            return await _repository.GetByKeycloakIdAsync(keycloakId);
         }
 
         public async Task<UserProfile> UpdateProfileAsync(
@@ -40,27 +40,35 @@ namespace backend.Application.Services
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
-                _context.UserProfiles.Add(user);
+                await _repository.AddAsync(user);
             }
-
-            user.UserName = dto.Name ?? user.UserName;
-            user.City = dto.City ?? user.City;
-            user.Bio = dto.Bio ?? user.Bio;
-            if (!string.IsNullOrEmpty(dto.SkillLevel) &&
-                Enum.TryParse<SkillLevel>(dto.SkillLevel, true, out var skill))
-                    {
-                        user.SkillLevel = skill;
-                    }
-
-            if (avatar != null)
+            else
             {
-                var url = await _fileService.UploadFileAsync(avatar);
-                user.ProfilePhotoUrl = url;
+                user.UserName = dto.Name ?? user.UserName;
+                user.City = dto.City ?? user.City;
+                user.Bio = dto.Bio ?? user.Bio;
+                if (!string.IsNullOrEmpty(dto.SkillLevel))
+                {
+                    // Try parse string to enum safely
+                    if (Enum.TryParse<SkillLevel>(dto.SkillLevel, true, out var level))
+                    {
+                        user.SkillLevel = level;
+                    }
+                    // else keep current value
+                }
+
+
+                if (avatar != null)
+                {
+                    var url = await _fileService.UploadFileAsync(avatar);
+                    user.ProfilePhotoUrl = url;
+                }
+
+                user.UpdatedAt = DateTime.UtcNow;
+                 _repository.Update(user);
             }
 
-            user.UpdatedAt = DateTime.UtcNow;
-            await _context.SaveChangesAsync();
-
+            await _repository.SaveChangesAsync();
             return user;
         }
     }

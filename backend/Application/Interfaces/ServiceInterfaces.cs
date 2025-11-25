@@ -12,4 +12,8 @@ namespace backend.Application.Interfaces
             IFormFile? avatar
         );
     }
+    public interface IFileStorageService
+    {
+        Task<string> UploadFileAsync(IFormFile file);
+    }
 }

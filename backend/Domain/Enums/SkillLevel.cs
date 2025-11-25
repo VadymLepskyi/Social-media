@@ -2,9 +2,10 @@ namespace backend.Domain.Enums
 {
     public enum SkillLevel
         {
-            Beginner = 0,
-            Intermediate = 1,
-            Advanced = 2,
-            Professional= 3
+            Beginner = 1,
+            Intermediate = 2,
+            Advanced = 3,
+            Professional= 4,
+            Expert=5
         }
 }

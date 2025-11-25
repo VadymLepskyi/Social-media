@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using backend.Infrastructure.Data;
 using backend.Application.Interfaces;  // for IUserProfileService
 using backend.Application.Services;
-
+using backend.Infrastructure.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 //  CORS
@@ -22,6 +22,7 @@ builder.Services.AddControllers();
 // Register your Services
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
 // PostgreSQL provider
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

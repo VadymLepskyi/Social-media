@@ -19,14 +19,14 @@ export default function UploadForm({ handleSubmit }: UploadFormProp) {
                 </div>
                 <div>
                     <label htmlFor="skill_level" className="block text-sm font-medium text-padel-primary mb-1">Padel Skill Level</label>
-                    <select id="skill_level" name="skill_level" defaultValue=""
+                    <select id="skill_level" name="SkillLevel" defaultValue=""
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-padel-accent focus:border-padel-accent transition duration-150 bg-white appearance-none">
                         <option className="text-gray-200" value="" disabled   >Select your level: </option>
-                        <option value="1.0">Beginner (1.0)</option>
-                        <option value="2.5">Novice (2.5)</option>
-                        <option value="3.5" >Intermediate (3.5)</option>
-                        <option value="4.5">Advanced (4.5)</option>
-                        <option value="5.0">Expert (5.0+)</option>
+                        <option value="Beginner">Beginner (1.0)</option>
+                        <option value="Intermediate">Intermediate (2.5)</option>
+                        <option value="Advanced" >Advanced (3.5)</option>
+                        <option value="Professional">Professional (4.5)</option>
+                        <option value="Expert">Expert (5.0+)</option>
                     </select>
                 </div>
                 <div>

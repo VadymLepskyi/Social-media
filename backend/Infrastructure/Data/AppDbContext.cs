@@ -1,4 +1,4 @@
-
+using backend.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using backend.Domain.Entities;
 
@@ -26,7 +26,11 @@ namespace backend.Infrastructure.Data
                 entity.Property(u => u.UserName).HasMaxLength(100);
                 entity.Property(u => u.City).HasMaxLength(100);
                 entity.Property(u => u.Bio).HasMaxLength(500);
-                entity.Property(u => u.SkillLevel).HasMaxLength(50);
+                entity.Property(u => u.SkillLevel)
+                    .HasConversion<string>()
+                    .HasMaxLength(50)
+                    .HasDefaultValue(SkillLevel.Beginner);
+
                 entity.Property(u => u.ProfilePhotoUrl).HasMaxLength(255);
 
                 entity.Property(u => u.CreatedAt)
