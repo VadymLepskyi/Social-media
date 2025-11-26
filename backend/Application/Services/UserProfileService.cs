@@ -17,8 +17,7 @@ namespace backend.Application.Services
             _fileService = fileService;
             _repository= repository;
         } 
-
-        public async Task<UserProfile?> GetByKeycloakIdAsync(string keycloakId)
+        public async Task<UserProfile?> PostAndGetUserByKeycloakIdAsync(string keycloakId)
         {
             return await _repository.GetByKeycloakIdAsync(keycloakId);
         }
@@ -29,7 +28,7 @@ namespace backend.Application.Services
             IFormFile? avatar
         )
         {
-            var user = await GetByKeycloakIdAsync(keycloakId);
+            var user = await PostAndGetUserByKeycloakIdAsync(keycloakId);
 
             if (user == null)
             {

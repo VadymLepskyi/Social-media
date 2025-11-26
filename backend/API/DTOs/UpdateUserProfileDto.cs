@@ -6,5 +6,6 @@ namespace backend.Application.DTOs
         public string? City { get; set; }
         public string? Bio { get; set; }
         public string? SkillLevel { get; set; }
+       
     }
 }

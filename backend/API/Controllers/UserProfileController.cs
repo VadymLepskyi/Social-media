@@ -1,6 +1,7 @@
 using backend.Application.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using backend.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.API.Controllers
 {
@@ -9,12 +10,11 @@ namespace backend.API.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileService _service;
-
+        private string? KeycloakId => User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
         public UserProfileController(IUserProfileService service)
         {
             _service = service;
         }
-
         [HttpPost("updateProfile")]
         public async Task<IActionResult> UpdateProfile(
             [FromForm] UpdateUserProfileDto dto,
@@ -22,18 +22,14 @@ namespace backend.API.Controllers
         )
         {
             try
-            {
-                var keycloakId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                Console.WriteLine($"KeycloakId: {keycloakId}");
+            {               
+                Console.WriteLine($"KeycloakId: {KeycloakId}");
                 Console.WriteLine($"DTO Name: {dto?.Name}, City: {dto?.City}, Bio: {dto?.Bio}, Skill: {dto?.SkillLevel}");
                 Console.WriteLine($"Avatar file: {avatar?.FileName}");
-
-                if (keycloakId == null) return Unauthorized();
-                
+                if (KeycloakId == null) return Unauthorized();
                 if (dto == null)
                     return BadRequest("Missing profile data");
-                var user = await _service.UpdateProfileAsync(keycloakId, dto, avatar);
-
+                var user = await _service.UpdateProfileAsync(KeycloakId, dto, avatar);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -42,10 +38,14 @@ namespace backend.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("GetProfile")]
+        [Authorize]
+        [HttpGet("getProfile")]
         public async Task<IActionResult> GetProfile()
         {
-            return Ok(user)
+            if(KeycloakId==null) return Unauthorized("Keycloak Id not found");
+            var user= await _service.PostAndGetUserByKeycloakIdAsync(KeycloakId);
+            if(user==null) return NotFound ("User not found");
+            return Ok(user);
         }
     }
 }
