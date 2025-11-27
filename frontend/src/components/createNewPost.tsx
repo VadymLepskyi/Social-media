@@ -1,5 +1,7 @@
 export default function CreateNewPost()
 {
+    const message=""
+    
     return(
         <div>
             <div className="p-6 rounded-lg shadow-lg border border-gray-100">

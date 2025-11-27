@@ -8,4 +8,8 @@ namespace backend.Application.DTOs
         public string? SkillLevel { get; set; }
        
     }
+    public class CreateUserPostDto
+    {
+        public string? PostContent {get; set;}
+    }
 }
