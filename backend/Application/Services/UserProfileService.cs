@@ -1,6 +1,6 @@
 using backend.Infrastructure.Data;
 using backend.Domain.Entities;
-using backend.Application.DTOs;
+using backend.API.DTOs;
 using backend.Domain.Enums;
 using backend.Application.Interfaces;
 namespace backend.Application.Services
@@ -48,25 +48,19 @@ namespace backend.Application.Services
                 user.Bio = dto.Bio ?? user.Bio;
                 if (!string.IsNullOrEmpty(dto.SkillLevel))
                 {
-                    // Try parse string to enum safely
                     if (Enum.TryParse<SkillLevel>(dto.SkillLevel, true, out var level))
                     {
                         user.SkillLevel = level;
                     }
-                    // else keep current value
                 }
-
-
                 if (avatar != null)
                 {
                     var url = await _fileService.UploadFileAsync(avatar);
                     user.ProfilePhotoUrl = url;
                 }
-
                 user.UpdatedAt = DateTime.UtcNow;
                  _repository.Update(user);
             }
-
             await _repository.SaveChangesAsync();
             return user;
         }

@@ -9,4 +9,9 @@ namespace backend.Application.Interfaces
         Task SaveChangesAsync();
         
     }
+      public interface IUserPostRepository
+    {
+        Task<UserPost>AddUserPostAsync (UserPost userPost);
+    }
+
 }

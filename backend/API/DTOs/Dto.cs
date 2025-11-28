@@ -1,4 +1,4 @@
-namespace backend.Application.DTOs
+namespace backend.API.DTOs
 {
     public class UpdateUserProfileDto
     {
@@ -8,7 +8,7 @@ namespace backend.Application.DTOs
         public string? SkillLevel { get; set; }
        
     }
-    public class CreateUserPostDto
+    public class UpdateUserPostDto
     {
         public string? PostContent {get; set;}
     }

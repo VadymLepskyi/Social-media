@@ -23,6 +23,9 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserProfileService, UserProfileService>();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+builder.Services.AddScoped<IUserPostInterface, UserPostService>();
+builder.Services.AddScoped<IUserPostRepository, UserPostRepository>();
+
 
 // PostgreSQL provider
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

@@ -1,4 +1,4 @@
-using backend.Application.DTOs;
+using backend.API.DTOs;
 using backend.Domain.Entities;
 namespace backend.Application.Interfaces
 {
@@ -16,5 +16,9 @@ namespace backend.Application.Interfaces
     public interface IFileStorageService
     {
         Task<string> UploadFileAsync(IFormFile file);
+    }
+    public interface IUserPostInterface
+    {
+        Task<UserPost> CreateUserPostAsync (UpdateUserPostDto postDto,string keycloakId);
     }
 }
