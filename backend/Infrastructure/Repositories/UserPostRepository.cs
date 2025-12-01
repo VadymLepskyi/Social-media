@@ -17,5 +17,10 @@ namespace backend.Infrastructure.Repositories
            await _context.SaveChangesAsync();
             return userPost;
         }
+        public async Task<UserPost>  GetUserPostAsync(string keycloak)
+        {
+            // await _context.UserPosts.
+            return userPost:
+        }
     }
 }

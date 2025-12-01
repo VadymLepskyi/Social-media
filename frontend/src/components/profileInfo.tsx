@@ -11,11 +11,14 @@ export default function ProfileInfo()
                 <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
                     <div className="flex flex-col items-center ">
                         <div className="w-24 h-24 bg-gray-500 rounded-full flex items-center justify-center border-4 border-padel-accent overflow-hidden">
-                            <img
-                            src={`${profile.profilePhotoUrl}?t=${Date.now()}`}
-
-                            className="w-full h-full object-cover"
-                            />
+                            {profile.profilePhotoUrl ? (
+                                <img
+                                    src={`${profile.profilePhotoUrl}?t=${Date.now()}`}
+                                    className="w-full h-full object-cover"
+                                />
+                                ) : (
+                                <span className="text-gray-400 text-sm">No image</span>
+                                )}
 
                         </div>
                         <div className="mt-4 text-3xl font-extrabold text-padel-primary">

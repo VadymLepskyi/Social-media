@@ -46,7 +46,7 @@ namespace backend.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
 
-                    b.Property<Guid?>("UserProfileId")
+                    b.Property<Guid>("UserProfileId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("UserProfileId1")
@@ -115,7 +115,8 @@ namespace backend.Migrations
                     b.HasOne("backend.Domain.Entities.UserProfile", null)
                         .WithMany("Posts")
                         .HasForeignKey("UserProfileId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("backend.Domain.Entities.UserProfile", "UserProfile")
                         .WithMany()

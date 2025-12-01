@@ -17,6 +17,7 @@ return(
                         style={{display:"none"}}
                         onChange={handleImageChange}
                         className="text-lg text-gray-500 "
+                        placeholder="Avatar"
                     />
                     {avatarPreview ? (
                             <img
