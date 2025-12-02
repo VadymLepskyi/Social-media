@@ -12,6 +12,7 @@ namespace backend.Application.Interfaces
       public interface IUserPostRepository
     {
         Task<UserPost>AddUserPostAsync (UserPost userPost);
+        Task<ICollection<UserPost>> GetUserPostAsync(string keycloak);
     }
 
 }

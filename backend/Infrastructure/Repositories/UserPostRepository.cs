@@ -17,10 +17,11 @@ namespace backend.Infrastructure.Repositories
            await _context.SaveChangesAsync();
             return userPost;
         }
-        public async Task<UserPost>  GetUserPostAsync(string keycloak)
+        public async Task<ICollection<UserPost>> GetUserPostAsync(string keycloak)
         {
-            // await _context.UserPosts.
-            return userPost:
+           var user= await _context.UserProfiles.Include(u=>u.Posts).FirstOrDefaultAsync(u=>u.KeycloakId==keycloak)
+            ?? throw new Exception("User not found");
+           return user.Posts;
         }
     }
 }

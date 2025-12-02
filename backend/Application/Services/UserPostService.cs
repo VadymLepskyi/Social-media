@@ -33,6 +33,10 @@ namespace backend.Application.Services
             await _repository.AddUserPostAsync(post);
                 return post;
         }
+        public async Task<ICollection<UserPost>> GetUserPostAsync(string keycloakId)
+        {
+            return await _repository.GetUserPostAsync(keycloakId);
+        }
        
     }
 }

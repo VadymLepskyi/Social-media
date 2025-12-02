@@ -35,6 +35,16 @@ namespace backend.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [Authorize]
+        [HttpGet("retrievePosts")]
+        public async Task<IActionResult> RetrievePosts()
+        {
+             if (KeycloakId == null)
+                return Unauthorized("Keycloak Id not found");
+
+            var posts= await _service.GetUserPostAsync(KeycloakId);
+            return Ok(posts);
+        }
 
          
     }
