@@ -1,4 +1,5 @@
 using backend.Domain.Enums;
+using backend.API.DTOs;
 namespace backend.Domain.Entities
 {
     public class UserProfile

@@ -20,6 +20,6 @@ namespace backend.Application.Interfaces
     public interface IUserPostInterface
     {
         Task<UserPost> CreateUserPostAsync (UpdateUserPostDto postDto,string keycloakId);
-        Task<ICollection<UserPost>> GetUserPostAsync(string keycloakId);
+        Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloakId);
     }
 }

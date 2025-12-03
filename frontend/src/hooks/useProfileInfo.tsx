@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import keycloak from "../keycloak"
-import {UseProfileInterface} from "../interfaces/interfaces"
+import {UseProfileProps} from "../interfaces/interfaces"
 
 export function useProfile() {
-  const [profile, setProfile] = useState<UseProfileInterface|null>(null);
+  const [profile, setProfile] = useState<UseProfileProps|null>(null);
   const [error, setError] = useState<Error|null>(null);
   useEffect(() => {
     async function loadProfile() {

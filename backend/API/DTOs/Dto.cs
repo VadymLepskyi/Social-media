@@ -10,6 +10,10 @@ namespace backend.API.DTOs
     }
     public class UpdateUserPostDto
     {
-        public string? PostContent {get; set;}
+        public Guid PostId { get; set; }
+        public string? UserName { get; set; } = string.Empty;
+        public string? PostContent { get; set; }
+        public string? PostMediaUrl { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 import keycloak from "../keycloak"
+import usePost from "../hooks/useGetPost"
 export default function useCreateNewPost()
 {
     const createNewPost= async(message:string) => {

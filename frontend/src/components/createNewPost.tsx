@@ -1,6 +1,5 @@
 import {useState} from "react"
 import useCreateNewPost from "../hooks/useCreateNewPost"
-import {useNavigate} from "react-router-dom"
 export default function CreateNewPost()
 {
     const [message,setMessage]= useState("")

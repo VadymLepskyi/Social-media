@@ -1,4 +1,5 @@
 using backend.Domain.Entities;
+using backend.API.DTOs;
 namespace backend.Application.Interfaces
 {
     public interface IUserProfileRepository
@@ -12,7 +13,7 @@ namespace backend.Application.Interfaces
       public interface IUserPostRepository
     {
         Task<UserPost>AddUserPostAsync (UserPost userPost);
-        Task<ICollection<UserPost>> GetUserPostAsync(string keycloak);
+        Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloak);
     }
 
 }
