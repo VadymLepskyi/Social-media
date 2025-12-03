@@ -1,5 +1,4 @@
 import PageContainer from "../components/pageContainer";
-import pageContainer from "../components/pageContainer"
 export default function HomePage() {
   return (
     <PageContainer title="Padel News">
