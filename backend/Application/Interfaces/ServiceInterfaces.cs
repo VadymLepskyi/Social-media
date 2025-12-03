@@ -21,5 +21,6 @@ namespace backend.Application.Interfaces
     {
         Task<UserPost> CreateUserPostAsync (UpdateUserPostDto postDto,string keycloakId);
         Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloakId);
+        Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync();
     }
 }

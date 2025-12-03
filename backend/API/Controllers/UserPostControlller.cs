@@ -45,6 +45,13 @@ namespace backend.API.Controllers
             var posts= await _service.GetUserPostAsync(KeycloakId);
             return Ok(posts);
         }
+        [Authorize]
+        [HttpGet("retrieveUsersPosts")]
+        public async Task<IActionResult> RetrieveUsersPosts()
+        {   
+            var posts = await _service.GetAllUsersPostsAsync();
+            return Ok(posts);
+        }
 
          
     }

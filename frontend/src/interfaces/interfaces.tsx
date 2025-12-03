@@ -27,5 +27,9 @@ export interface pageProps
 {
     title:string,
     children: ReactNode;
-
+}
+export interface PostFeedProps {
+  post: any[];          
+  error?: Error | null;
+  loading?: boolean;
 }

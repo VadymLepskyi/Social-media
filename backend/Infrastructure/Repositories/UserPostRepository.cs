@@ -31,5 +31,21 @@ namespace backend.Infrastructure.Repositories
                 CreatedAt = p.CreatedAt
             }).ToList();
         }
+        public async Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync()
+        {
+            var posts = await _context.UserPosts
+                .Include(p => p.UserProfile)
+                .ToListAsync(); 
+            return posts.Select(p => new UpdateUserPostDto
+            {
+                UserId = p.UserProfile?.Id ?? Guid.Empty,
+                UserName = p.UserProfile?.UserName ?? "Unknown",
+                PostId = p.PostId,
+                PostContent = p.PostContent,
+                CreatedAt = p.CreatedAt
+            }).ToList();
+        }
+
+
     }          
 }

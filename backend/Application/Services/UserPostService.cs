@@ -37,6 +37,10 @@ namespace backend.Application.Services
         {
             return await _repository.GetUserPostAsync(keycloakId);
         }
+        public async Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync()
+        {
+            return await _repository.GetAllUsersPostsAsync();
+        }
        
     }
 }

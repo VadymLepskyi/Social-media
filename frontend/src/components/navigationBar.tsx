@@ -1,7 +1,7 @@
 import{ useNavigate } from "react-router-dom";
 import padelBall from '../images/padelBall.png';
 import { Link } from "react-router-dom";
-import { Home, Users, User  } from "lucide-react";
+import { Home, Users, User,LogOut  } from "lucide-react";
 
 export default function Navigationar()
 {
@@ -32,6 +32,10 @@ export default function Navigationar()
                          <Link to="/profile" className="flex items-center gap-2 text-white hover:text-blue-400">
                             <User  size={24} />
                             <span>Profile</span>
+                        </Link>
+                        <Link to="/profile" className="flex items-center gap-2 text-white hover:text-blue-400">
+                            <LogOut  size={24} />
+                            <span>Log out</span>
                         </Link>
                 </div>
             </div>

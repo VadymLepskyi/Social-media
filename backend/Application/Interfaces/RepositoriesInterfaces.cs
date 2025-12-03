@@ -14,6 +14,7 @@ namespace backend.Application.Interfaces
     {
         Task<UserPost>AddUserPostAsync (UserPost userPost);
         Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloak);
+        Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync();
     }
 
 }
