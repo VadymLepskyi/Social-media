@@ -1,7 +1,9 @@
+import PageContainer from "../components/pageContainer";
+import pageContainer from "../components/pageContainer"
 export default function HomePage() {
   return (
-    <div >
-Home page
-    </div>
+    <PageContainer title="Padel News">
+      <></>
+    </PageContainer>
   );
 }

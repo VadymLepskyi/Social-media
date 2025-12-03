@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 
 export interface FormDataDtoProps {
     name: string;
@@ -21,4 +22,10 @@ export interface UserPostProps
     mediaUrl?: string;
     createdAt: string;
     postId:string;
+}
+export interface pageProps
+{
+    title:string,
+    children: ReactNode;
+
 }

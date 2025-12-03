@@ -9,7 +9,7 @@ export default function PostItem() {
         (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   return (
-    <div>
+    <div className="space-y-1">
       {sortedPosts.map((p) => {
         const formattedDate = new Date(p.createdAt).toLocaleString("en-GB", {
           day: "2-digit",

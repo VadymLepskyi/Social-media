@@ -1,3 +1,4 @@
+import PageContainer from "../components/pageContainer";
 import UploadForm from "../components/profileUploadForm"
 import UploadAvatar from "../components/profileUploadAvatar"
 import {useState} from "react"
@@ -22,11 +23,9 @@ export default function EditProfilePage()
     updateProfile(formData);
 };
     return(
-    <div className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-extrabold text-padel-primary mb-6">Edit Your Profile</h2>
-            <div className="bg-white p-8 rounded-xl shadow-2xl border border-padel-accent/30 space-y-6">
-                <UploadAvatar handleImageChange={handleImageChange} avatarPreview={avatarPreview}/>
-                <UploadForm  handleSubmit={handleSubmit} />
-            </div>
-    </div>);
+        <PageContainer title="Edit Profile">
+            <UploadAvatar handleImageChange={handleImageChange} avatarPreview={avatarPreview}/>
+            <UploadForm  handleSubmit={handleSubmit} />
+        </PageContainer>
+        );
 }
