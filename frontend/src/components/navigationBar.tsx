@@ -1,10 +1,26 @@
 import{ useNavigate } from "react-router-dom";
 import padelBall from '../images/padelBall.png';
 import { Link } from "react-router-dom";
+
 import { Home, Users, User,LogOut  } from "lucide-react";
 
 export default function Navigationar()
 {
+const handleLogout = () => {
+  // Clear local tokens
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+
+  const keycloakBase = "http://localhost:8080/realms/Padel/protocol/openid-connect/logout";
+  const redirectUri = encodeURIComponent("http://localhost:3000/");
+  const clientId = "myclient"; // <-- IMPORTANT: use your real client_id
+
+  window.location.href = 
+    `${keycloakBase}?client_id=${clientId}&post_logout_redirect_uri=${redirectUri}`;
+};
+
+
+
     const navigate=useNavigate();
     return(
         <header className="bg-padel-primary shadow-lg sticky top-0 z-10">
@@ -33,10 +49,11 @@ export default function Navigationar()
                             <User  size={24} />
                             <span>Profile</span>
                         </Link>
-                        <Link to="/profile" className="flex items-center gap-2 text-white hover:text-blue-400">
+                        <button className="flex items-center gap-2 text-white hover:text-blue-400"
+                            onClick={handleLogout}>
                             <LogOut  size={24} />
                             <span>Log out</span>
-                        </Link>
+                        </button>
                 </div>
             </div>
             </header>
