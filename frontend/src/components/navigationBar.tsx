@@ -6,20 +6,17 @@ import { Home, Users, User,LogOut  } from "lucide-react";
 
 export default function Navigationar()
 {
-const handleLogout = () => {
-  // Clear local tokens
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
+    const handleLogout = () => {
+    // Clear local tokens
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 
-  const keycloakBase = "http://localhost:8080/realms/Padel/protocol/openid-connect/logout";
-  const redirectUri = encodeURIComponent("http://localhost:3000/");
-  const clientId = "myclient"; // <-- IMPORTANT: use your real client_id
-
-  window.location.href = 
-    `${keycloakBase}?client_id=${clientId}&post_logout_redirect_uri=${redirectUri}`;
+    const keycloakBase = "http://localhost:8080/realms/Padel/protocol/openid-connect/logout";
+    const redirectUri = encodeURIComponent("http://localhost:3000/");
+    const clientId = "myclient";
+    window.location.href = 
+        `${keycloakBase}?client_id=${clientId}&post_logout_redirect_uri=${redirectUri}`;
 };
-
-
 
     const navigate=useNavigate();
     return(
