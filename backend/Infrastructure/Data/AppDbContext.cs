@@ -36,7 +36,7 @@ namespace backend.Infrastructure.Data
             modelBuilder.Entity<UserPost>(entity =>
             {
                  entity.HasKey(u =>u.PostId);
-                 entity.HasOne<UserProfile>()           // Each post belongs to one user
+                 entity.HasOne(u=>u.UserProfile)        // Each post belongs to one user
                  .WithMany(u => u.Posts)                // Each user can have many posts
                  .HasForeignKey(u => u.UserProfileId)   // UserProfileId is the foreign key in UserPost
                  .OnDelete(DeleteBehavior.Cascade);     // When a user is deleted, delete all their posts

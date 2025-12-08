@@ -9,8 +9,6 @@ import EditProfilePage  from './pages/EditorProfilePage';
 import NavigationBar from './components/navigationBar';
 import keycloak from './keycloak';
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
   if(authenticated)
@@ -18,7 +16,6 @@ keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
     console.log("Keycloak token:", keycloak.token);
     console.log("Token expiration:", keycloak.tokenParsed?.exp);
 
-    const token= keycloak.token
     await fetch("http://localhost:5145/api/users/sync", {
           method: "POST",
           headers: {
@@ -44,8 +41,8 @@ function App(){
         <NavigationBar/>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
-          <Route path="/profile" element={<ProfilePage/>}/>
-          <Route path="profile/edit" element={<EditProfilePage/>}/>
+          <Route path="/profile/:userId" element={<ProfilePage />} />
+          <Route path="profile/:userId/edit" element={<EditProfilePage/>}/>
           <Route path="/community" element={<CommunityPage/>}/>
         </Routes>
     </BrowserRouter>

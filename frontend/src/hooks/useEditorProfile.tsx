@@ -16,13 +16,9 @@ export default function UseEditorProfile()
         }   
         if (!res.ok) throw new Error("Failed to update profile");
         console.log("Profile updated successfully");
-    } catch (err) {
-        console.error(err);
-    }
-} 
-    return(
-        {updateProfile}
-    );
-
-
+        } catch (err) {
+            console.error(err);
+        }
+    } 
+    return({updateProfile});
 }

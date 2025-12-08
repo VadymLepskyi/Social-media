@@ -13,11 +13,13 @@ export interface UseProfileProps
     city:string,
     bio:string,
     skillLevel:string,
-    profilePhotoUrl: string
+    profilePhotoUrl: string,
+    id:string
 }
 export interface UserPostProps
 {
     userName: string,
+    userId?: string,
     postContent: string,
     mediaUrl?: string;
     createdAt: string;

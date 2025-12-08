@@ -46,6 +46,7 @@ namespace backend.Application.Services
                 user.UserName = dto.Name ?? user.UserName;
                 user.City = dto.City ?? user.City;
                 user.Bio = dto.Bio ?? user.Bio;
+                
                 if (!string.IsNullOrEmpty(dto.SkillLevel))
                 {
                     if (Enum.TryParse<SkillLevel>(dto.SkillLevel, true, out var level))

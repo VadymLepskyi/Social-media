@@ -44,7 +44,7 @@ namespace backend.API.Controllers
             }
         }
         [Authorize]
-        [HttpGet("getProfile")]
+        [HttpGet("me")]
         public async Task<IActionResult> GetProfile()
         {
             if (KeycloakId == null) return Unauthorized("Keycloak Id not found");

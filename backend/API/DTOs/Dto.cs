@@ -6,6 +6,7 @@ namespace backend.API.DTOs
         public string? City { get; set; }
         public string? Bio { get; set; }
         public string? SkillLevel { get; set; }
+        public Guid? Id {get;set;}
        
     }
     public class UpdateUserPostDto

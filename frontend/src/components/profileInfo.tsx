@@ -1,9 +1,11 @@
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 import {useProfile} from "../hooks/useProfileInfo"
+
 export default function ProfileInfo()
 {
     const navigate= useNavigate();
-    const {profile,error}=useProfile()
+    const {id}=useParams();
+    const {profile,error}=useProfile(id);
     if (error) return <p>Error: {error.message}</p>;
     if (!profile) return <p>Loading...</p>;
     return(
@@ -19,7 +21,6 @@ export default function ProfileInfo()
                                 ) : (
                                 <span className="text-gray-400 text-sm">No image</span>
                                 )}
-
                         </div>
                         <div className="mt-4 text-3xl font-extrabold text-padel-primary">
                                 {profile.userName}

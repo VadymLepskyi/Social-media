@@ -29,5 +29,7 @@ export default function usePost()
         }
         fetchPost();
     },[]); 
+
+    
     return { post, error };
 }

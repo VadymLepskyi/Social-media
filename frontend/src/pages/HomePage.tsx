@@ -1,11 +1,11 @@
 import PageContainer from "../components/pageContainer";
 import PostFeed from "../components/postFeed";
-import usePost from "../hooks/useGetPost";
+import useGetAllPosts from "../hooks/useGetAllPosts";
 export default function HomePage() {
-  const { post, error } = usePost();
+  const { posts, error } = useGetAllPosts();
   return (
     <PageContainer title="Padel News">
-      <PostFeed post={post||[]} error={error}></PostFeed>
+      <PostFeed post={posts||[]} error={error}></PostFeed>
     </PageContainer>
   );
 }
