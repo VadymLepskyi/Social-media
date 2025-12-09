@@ -10,7 +10,7 @@ namespace backend.Application.Interfaces
             UpdateUserProfileDto dto,
             IFormFile? avatar
         );
-        
+        Task<UserProfile?> FindUserByDbIdAsync(Guid userId);
 
     }
     public interface IFileStorageService
@@ -19,8 +19,9 @@ namespace backend.Application.Interfaces
     }
     public interface IUserPostInterface
     {
-        Task<UserPost> CreateUserPostAsync (UpdateUserPostDto postDto,string keycloakId);
-        Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloakId);
-        Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync();
+        Task<UserPostDto> CreateUserPostAsync (UserPostDto postDto,string keycloakId);
+        Task<ICollection<UserPostDto>> GetUserPostAsync(string keycloakId);
+        Task<List<UserPostDto>> GetAllUsersPostsAsync();
+         Task<ICollection<UserPostDto>>GetPostByUserId(Guid id);
     }
 }

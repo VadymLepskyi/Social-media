@@ -27,6 +27,9 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:26.0.5
     command: start-dev
+    volumes:
+      - ./keycloak-theme/padel-theme:/opt/keycloak/themes/padel-theme
+
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin

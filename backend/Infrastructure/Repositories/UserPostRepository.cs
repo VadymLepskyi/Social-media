@@ -18,31 +18,47 @@ namespace backend.Infrastructure.Repositories
            await _context.SaveChangesAsync();
             return userPost;
         }
-        public async Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloak)
+        public async Task<ICollection<UserPostDto>> GetUserPostAsync(string keycloak)
         {
            var user= await _context.UserProfiles.Include(u=>u.Posts).FirstOrDefaultAsync(u=>u.KeycloakId==keycloak)
             ?? throw new Exception("User not found");
-           return user.Posts.Select(p => new UpdateUserPostDto
+           return user.Posts.Select(p => new UserPostDto
             {
-                PostId = p.PostId,
-                UserName = user.UserName, 
+                PostId = p.PostId.ToString(),
+                UserId = p.UserProfileId.ToString(),
+                UserName = p.UserProfile?.UserName,
                 PostContent = p.PostContent,
-                PostMediaUrl = p.PostMediaUrl,
+                MediaUrl = p.PostMediaUrl,
                 CreatedAt = p.CreatedAt
             }).ToList();
         }
-        public async Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync()
+        public async Task<List<UserPostDto>> GetAllUsersPostsAsync()
         {
             var posts = await _context.UserPosts
                 .Include(p => p.UserProfile)
                 .ToListAsync(); 
-            return posts.Select(p => new UpdateUserPostDto
+            return posts.Select(p => new UserPostDto
             {
-                UserId = p.UserProfile?.Id ?? Guid.Empty,
+                UserId = p.UserProfile?.Id.ToString() ?? Guid.Empty.ToString(),
                 UserName = p.UserProfile?.UserName ?? "Unknown",
-                PostId = p.PostId,
+                PostId = p.PostId.ToString(),
                 PostContent = p.PostContent,
                 CreatedAt = p.CreatedAt
+            }).ToList();
+        }
+        public async Task<ICollection<UserPostDto>>GetPostByUserId(Guid id)
+        {
+            var user= await _context.UserProfiles.Include(u=>u.Posts).FirstOrDefaultAsync(u=>u.Id==id)
+            ?? throw new Exception("User not found");
+            return user.Posts.Select(p=> new UserPostDto
+            {
+                PostId = p.PostId.ToString(),
+                UserId = p.UserProfileId.ToString(),
+                UserName = p.UserProfile?.UserName,
+                PostContent = p.PostContent,
+                MediaUrl = p.PostMediaUrl,
+                CreatedAt = p.CreatedAt
+                
             }).ToList();
         }
 

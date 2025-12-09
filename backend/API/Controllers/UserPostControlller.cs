@@ -17,7 +17,7 @@ namespace backend.API.Controllers
         }
     [Authorize]
     [HttpPost("createPost")]
-        public async Task<IActionResult> CreatePost([FromBody] UpdateUserPostDto dto)
+        public async Task<IActionResult> CreatePost([FromBody] UserPostDto dto)
         {
             if (KeycloakId == null)
                 return Unauthorized("Keycloak Id not found");
@@ -51,6 +51,20 @@ namespace backend.API.Controllers
         {   
             var posts = await _service.GetAllUsersPostsAsync();
             return Ok(posts);
+        }
+        [Authorize]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetPostByUserId(Guid userId)
+        {
+            if (userId == Guid.Empty)
+                return BadRequest("Missing or invalid userId");
+
+            var user = await _service.GetPostByUserId(userId);
+
+            if (user == null)
+                return NotFound("User not found");
+
+            return Ok(user);
         }
 
          

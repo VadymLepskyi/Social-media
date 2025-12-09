@@ -3,20 +3,17 @@ import CreateNewPost from "../components/createNewPost"
 import PageContainer from "../components/pageContainer";
 import PostFeed from "../components/postFeed"
 import usePost from "../hooks/useGetPost";
-
+import { useParams} from "react-router-dom"
 
 export default function Profile()
 {  
-    const { post, error } = usePost();
-
-  
-
+    const {userId}=useParams<{ userId: string }>();
+    const { post, error } = usePost(userId);
     return(
         <PageContainer title="Padel News">
-                <ProfileInfo/>
+                <ProfileInfo userId={userId}/>
                 <CreateNewPost/>
-                <PostFeed post={post||[]} error={error}></PostFeed>
+                <PostFeed post={post||[]} error={error} ></PostFeed>
             </PageContainer>
     );
-    
 }

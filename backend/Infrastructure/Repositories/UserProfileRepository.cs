@@ -31,6 +31,11 @@ namespace backend.Infrastructure.Repositories
         {
             await _context.SaveChangesAsync();
         }
+        public async Task<UserProfile?> FindUserByDbIdAsync(Guid userId)
+        {
+            var user= await _context.UserProfiles.FindAsync(userId);
+            return user;
+        }
     }
 
 }

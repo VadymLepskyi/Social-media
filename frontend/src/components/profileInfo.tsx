@@ -1,11 +1,11 @@
 import {useNavigate, useParams} from "react-router-dom"
 import {useProfile} from "../hooks/useProfileInfo"
 
-export default function ProfileInfo()
+export default function ProfileInfo({ userId }: { userId?: string })
 {
     const navigate= useNavigate();
-    const {id}=useParams();
-    const {profile,error}=useProfile(id);
+    
+    const {profile,error}=useProfile(userId);
     if (error) return <p>Error: {error.message}</p>;
     if (!profile) return <p>Loading...</p>;
     return(

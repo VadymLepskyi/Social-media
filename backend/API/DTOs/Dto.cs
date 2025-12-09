@@ -9,13 +9,15 @@ namespace backend.API.DTOs
         public Guid? Id {get;set;}
        
     }
-    public class UpdateUserPostDto
-    {
-        public Guid UserId { get; set; }
-        public Guid PostId { get; set; }
-        public string? UserName { get; set; } = string.Empty;
+   public class UserPostDto
+   {
+        public string? PostId { get; set; }
+        public string? UserId { get; set; }
+        public string? UserName { get; set; }
         public string? PostContent { get; set; }
-        public string? PostMediaUrl { get; set; }
+        public string? MediaUrl { get; set; }
+        
         public DateTime CreatedAt { get; set; }
     }
+
 }
