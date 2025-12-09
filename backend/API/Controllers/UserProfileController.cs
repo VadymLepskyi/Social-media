@@ -52,6 +52,19 @@ namespace backend.API.Controllers
             if(user==null) return NotFound ("User not found");
             return Ok(user);
         }
-        
+        [Authorize]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> FindUserByDbIdAsync(Guid userId)
+        {
+            if (userId == Guid.Empty)
+                return BadRequest("Missing or invalid userId");
+
+            var user = await _service.FindUserByDbIdAsync(userId);
+
+            if (user == null)
+                return NotFound("User not found");
+
+            return Ok(user);
+        }
     }
 }

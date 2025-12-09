@@ -16,22 +16,23 @@ export interface UseProfileProps
     profilePhotoUrl: string,
     id:string
 }
-export interface UserPostProps
-{
-    userName: string,
-    userId?: string,
-    postContent: string,
-    mediaUrl?: string;
-    createdAt: string;
-    postId:string;
+export interface UserPostProps {
+  postId: string;
+  userId: string;
+  userName: string;
+  postContent: string;
+  
+  mediaUrl?: string;
+  createdAt: string;
 }
+
 export interface pageProps
 {
     title:string,
     children: ReactNode;
 }
 export interface PostFeedProps {
-  post: any[];          
+  post: any[];        
   error?: Error | null;
   loading?: boolean;
 }

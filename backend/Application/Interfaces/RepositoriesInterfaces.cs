@@ -7,14 +7,17 @@ namespace backend.Application.Interfaces
         Task<UserProfile?>GetByKeycloakIdAsync(string keycloakId);
         Task<UserProfile?>AddAsync (UserProfile userProfile);
         UserProfile Update(UserProfile userProfile);
+        Task <UserProfile?> FindUserByDbIdAsync(Guid userId);
         Task SaveChangesAsync();
         
     }
       public interface IUserPostRepository
     {
         Task<UserPost>AddUserPostAsync (UserPost userPost);
-        Task<ICollection<UpdateUserPostDto>> GetUserPostAsync(string keycloak);
-        Task<List<UpdateUserPostDto>> GetAllUsersPostsAsync();
+        Task<ICollection<UserPostDto>> GetUserPostAsync(string keycloak);
+        Task<List<UserPostDto>> GetAllUsersPostsAsync();
+        Task<ICollection<UserPostDto>> GetPostByUserId(Guid id);
+
     }
 
 }

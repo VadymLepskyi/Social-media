@@ -65,6 +65,10 @@ namespace backend.Application.Services
             await _repository.SaveChangesAsync();
             return user;
         }
+        public async Task<UserProfile?> FindUserByDbIdAsync(Guid userId)
+        {
+            return await _repository.FindUserByDbIdAsync(userId);
+        }
     }
 
 }

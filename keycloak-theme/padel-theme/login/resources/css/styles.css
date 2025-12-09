@@ -1,0 +1,23 @@
+body {
+  background: url('resources/img/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+#kc-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;       /* Full viewport height */
+  background: transparent !important;
+}
+
+#kc-login {
+  background: rgba(255, 255, 255, 0.15); /* Glass effect */
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  padding: 40px;
+  width: 380px;
+  margin: auto;
+}

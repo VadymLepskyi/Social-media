@@ -35,16 +35,17 @@ keycloak.init({onLoad:"login-required"}).then(async(authenticated) =>{
   }
   }).catch(error=>console.error("Keycloak initilize error", error))
 
-function App(){
-  return(
+function App() {
+  return (
     <BrowserRouter>
-        <NavigationBar/>
-        <Routes>
-          <Route path="/" element={<HomePage/>}/>
-          <Route path="/profile/:userId" element={<ProfilePage />} />
-          <Route path="profile/:userId/edit" element={<EditProfilePage/>}/>
-          <Route path="/community" element={<CommunityPage/>}/>
-        </Routes>
+      <NavigationBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/edit" element={<EditProfilePage />} />
+        <Route path="/community" element={<CommunityPage />} />
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -42,7 +42,7 @@ export default function Navigationar()
                             <Users size={24} />
                             <span>Community</span>
                         </Link>
-                         <Link to="/profile/:userId" className="flex items-center gap-2 text-white hover:text-blue-400">
+                         <Link to="/profile" className="flex items-center gap-2 text-white hover:text-blue-400">
                             <User  size={24} />
                             <span>Profile</span>
                         </Link>
