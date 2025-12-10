@@ -10,7 +10,7 @@ export default function CreateNewPost()
     }
     return(
         <div>
-            <div className="p-6 rounded-lg shadow-lg border border-gray-100">
+            <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
                     <h3 className="font-bold text-xl text-padel-primary mb-4 border-b pb-2 ">What's on your mind ?</h3>
                    <textarea id="post-input"className="w-full p-3 border border-gray-300 rounded-lg  focus:border-padel-accent focus:outline-none resize-none"
                              placeholder="Write a new post..."

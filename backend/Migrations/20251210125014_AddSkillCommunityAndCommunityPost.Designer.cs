@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Infrastructure.Data;
@@ -11,9 +12,11 @@ using backend.Infrastructure.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251210125014_AddSkillCommunityAndCommunityPost")]
+    partial class AddSkillCommunityAndCommunityPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace backend.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.Property<Guid?>("SkillCommunityId")
+                    b.Property<Guid>("SkillCommunityId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserProfileId")
@@ -144,10 +147,11 @@ namespace backend.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<Guid?>("SkillCommunityId")
+                    b.Property<Guid>("SkillCommunityId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("SkillLevel")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
@@ -174,7 +178,8 @@ namespace backend.Migrations
                     b.HasOne("backend.Domain.Entities.SkillCommunity", "SkillCommunity")
                         .WithMany("CommunityPosts")
                         .HasForeignKey("SkillCommunityId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("backend.Domain.Entities.UserProfile", "UserProfile")
                         .WithMany("CommunityPosts")
@@ -202,7 +207,9 @@ namespace backend.Migrations
                 {
                     b.HasOne("backend.Domain.Entities.SkillCommunity", "SkillCommunity")
                         .WithMany("Members")
-                        .HasForeignKey("SkillCommunityId");
+                        .HasForeignKey("SkillCommunityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("SkillCommunity");
                 });

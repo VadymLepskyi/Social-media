@@ -14,6 +14,6 @@ export default function Profile()
                 <ProfileInfo userId={userId}/>
                 <CreateNewPost/>
                 <PostFeed post={post||[]} error={error} ></PostFeed>
-            </PageContainer>
+        </PageContainer>
     );
 }
