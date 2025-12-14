@@ -42,7 +42,7 @@ namespace backend.Domain.Entities
     }
     public class CommunityPost
     {
-         public Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         public Guid UserProfileId { get; set; }
         public UserProfile? UserProfile { get; set; }

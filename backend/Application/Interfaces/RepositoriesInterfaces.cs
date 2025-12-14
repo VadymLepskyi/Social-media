@@ -11,7 +11,7 @@ namespace backend.Application.Interfaces
         Task SaveChangesAsync();
         
     }
-      public interface IUserPostRepository
+    public interface IUserPostRepository
     {
         Task<UserPost>AddUserPostAsync (UserPost userPost);
         Task<ICollection<UserPostDto>> GetUserPostAsync(string keycloak);
@@ -20,8 +20,9 @@ namespace backend.Application.Interfaces
 
     }
     
-      public interface IUserSkillCommunityRepository
+    public interface ICommunityPostRepository
     {
+       Task<CommunityPost>AddUserPostAsync (CommunityPost userPost);
         
     }
 

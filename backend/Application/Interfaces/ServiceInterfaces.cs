@@ -28,4 +28,8 @@ namespace backend.Application.Interfaces
     {
         Task AssignCommunityAsync(UserProfile userProfile );
     }
+    public interface ICommunityPostInterface
+    {
+        Task<CommunityPostDto> CreateUserPostAsync (CommunityPostDto postDto,string keycloakId);
+    }
 }

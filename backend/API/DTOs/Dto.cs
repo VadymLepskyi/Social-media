@@ -29,5 +29,12 @@ namespace backend.API.DTOs
     public SkillLevel Level { get; set; }
     public DateTime CreatedAt { get; set; }
     }
+    public class CommunityPostDto
+    {
+        public string Content { get; set; } = string.Empty;
+        public string? MediaUrl { get; set; }
+        public Guid? SkillCommunityId { get; set; }
+    }
+
 
 }

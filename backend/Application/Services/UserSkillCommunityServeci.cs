@@ -17,9 +17,6 @@ namespace backend.Application.Services
         }
         public async Task AssignCommunityAsync(UserProfile user)
         {
-            // if (user.SkillLevel == null)
-            //     throw new InvalidOperationException("User must have a SkillLevel");
-
             var community = await _context.SkillCommunities
                 .FirstOrDefaultAsync(c => c.Level == user.SkillLevel);
 

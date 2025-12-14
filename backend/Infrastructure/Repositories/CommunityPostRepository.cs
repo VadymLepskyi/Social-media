@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using backend.API.DTOs;
 namespace backend.Infrastructure.Repositories
 {
-      public class SkillCommunityPostRepository: IUserSkillCommunityRepository
+      public class CommunityPostRepository: ICommunityPostRepository
     {
         private readonly AppDbContext _context;
-        public SkillCommunityPostRepository(AppDbContext contetx)
+        public CommunityPostRepository(AppDbContext contetx)
         {
             _context=contetx;
         }

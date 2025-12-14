@@ -26,6 +26,9 @@ builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 builder.Services.AddScoped<IUserPostInterface, UserPostService>();
 builder.Services.AddScoped<IUserPostRepository, UserPostRepository>();
 builder.Services.AddScoped<IUserSkillCommunity, UserSkillCommunity>();
+builder.Services.AddScoped<ICommunityPostRepository, CommunityPostRepository>();
+builder.Services.AddScoped<ICommunityPostInterface, CommunityPostService>();
+
 
 
 
