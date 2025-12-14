@@ -1,13 +1,16 @@
+using backend.Domain.Enums;
+using backend.Domain.Entities;
 namespace backend.API.DTOs
 {
-    public class UpdateUserProfileDto
+    public class UserProfileResponseDto
     {
         public string? Name { get; set; }
         public string? City { get; set; }
         public string? Bio { get; set; }
-        public string? SkillLevel { get; set; }
+        public SkillLevel SkillLevel { get; set; }
+        public SkillCommunityDto? Community { get; set; }       
         public Guid? Id {get;set;}
-       
+
     }
    public class UserPostDto
    {
@@ -18,6 +21,13 @@ namespace backend.API.DTOs
         public string? MediaUrl { get; set; }
         
         public DateTime CreatedAt { get; set; }
+    }
+    public class SkillCommunityDto
+    {
+    public Guid Id { get; set; }
+    public string? Name { get; set; }
+    public SkillLevel Level { get; set; }
+    public DateTime CreatedAt { get; set; }
     }
 
 }

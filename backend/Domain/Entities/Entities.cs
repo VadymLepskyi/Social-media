@@ -9,7 +9,7 @@ namespace backend.Domain.Entities
         public string? UserName { get; set; }
         public string? City {get;set;}
         public string? Bio {get;set;}
-        public SkillLevel? SkillLevel { get; set; } 
+        public SkillLevel SkillLevel { get; set; } 
         public Guid? SkillCommunityId{get;set;}
         public SkillCommunity? SkillCommunity{get;set;}
         public ICollection<CommunityPost>? CommunityPosts {get;set;}=new List<CommunityPost>();
@@ -19,8 +19,6 @@ namespace backend.Domain.Entities
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
-
     } 
     public class UserPost
     {
@@ -56,6 +54,6 @@ namespace backend.Domain.Entities
         public string? MediaUrl { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        
+            
     }
 }

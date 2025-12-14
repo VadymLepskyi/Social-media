@@ -19,5 +19,10 @@ namespace backend.Application.Interfaces
         Task<ICollection<UserPostDto>> GetPostByUserId(Guid id);
 
     }
+    
+      public interface IUserSkillCommunityRepository
+    {
+        
+    }
 
 }

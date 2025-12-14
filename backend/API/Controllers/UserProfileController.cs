@@ -22,7 +22,7 @@ namespace backend.API.Controllers
         }
         [HttpPost("updateProfile")]
         public async Task<IActionResult> UpdateProfile(
-            [FromForm] UpdateUserProfileDto dto,
+            [FromForm] UserProfileResponseDto dto,
             [FromForm] IFormFile? avatar
         )
         {

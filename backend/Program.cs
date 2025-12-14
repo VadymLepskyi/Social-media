@@ -25,6 +25,8 @@ builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 builder.Services.AddScoped<IUserPostInterface, UserPostService>();
 builder.Services.AddScoped<IUserPostRepository, UserPostRepository>();
+builder.Services.AddScoped<IUserSkillCommunity, UserSkillCommunity>();
+
 
 
 // PostgreSQL provider

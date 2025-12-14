@@ -7,13 +7,13 @@ namespace backend.Application.Services
 {
     public class UserProfileService : IUserProfileService
     {
-        private readonly AppDbContext _context;
+        private readonly IUserSkillCommunity _UserSkillCommunity;
         private readonly IFileStorageService _fileService;
         private readonly IUserProfileRepository _repository;
 
-        public UserProfileService(AppDbContext context, IFileStorageService fileService, IUserProfileRepository repository)
+        public UserProfileService( IFileStorageService fileService, IUserProfileRepository repository, IUserSkillCommunity UserSkillCommunity)
         {
-            _context = context;
+            _UserSkillCommunity = UserSkillCommunity;
             _fileService = fileService;
             _repository= repository;
         } 
@@ -22,11 +22,10 @@ namespace backend.Application.Services
             return await _repository.GetByKeycloakIdAsync(keycloakId);
         }
 
-        public async Task<UserProfile> UpdateProfileAsync(
+        public async Task<UserProfileResponseDto> UpdateProfileAsync(
             string keycloakId,
-            UpdateUserProfileDto dto,
-            IFormFile? avatar
-        )
+            UserProfileResponseDto dto,
+            IFormFile? avatar)
         {
             var user = await PostAndGetUserByKeycloakIdAsync(keycloakId);
 
@@ -36,35 +35,48 @@ namespace backend.Application.Services
                 {
                     Id = Guid.NewGuid(),
                     KeycloakId = keycloakId,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.UtcNow
                 };
+
                 await _repository.AddAsync(user);
             }
-            else
+
+            user.UserName = dto.Name ?? user.UserName;
+            user.City = dto.City ?? user.City;
+            user.Bio = dto.Bio ?? user.Bio;
+
+            user.SkillLevel = dto.SkillLevel;
+            await _UserSkillCommunity.AssignCommunityAsync(user);
+
+            if (avatar != null)
             {
-                user.UserName = dto.Name ?? user.UserName;
-                user.City = dto.City ?? user.City;
-                user.Bio = dto.Bio ?? user.Bio;
-                
-                if (!string.IsNullOrEmpty(dto.SkillLevel))
-                {
-                    if (Enum.TryParse<SkillLevel>(dto.SkillLevel, true, out var level))
-                    {
-                        user.SkillLevel = level;
-                    }
-                }
-                if (avatar != null)
-                {
-                    var url = await _fileService.UploadFileAsync(avatar);
-                    user.ProfilePhotoUrl = url;
-                }
-                user.UpdatedAt = DateTime.UtcNow;
-                 _repository.Update(user);
+                user.ProfilePhotoUrl =
+                    await _fileService.UploadFileAsync(avatar);
             }
+
+            user.UpdatedAt = DateTime.UtcNow;
+            _repository.Update(user);
             await _repository.SaveChangesAsync();
-            return user;
+
+            // 🔴 MAP TO DTO (critical)
+            return new UserProfileResponseDto
+            {
+                Id = user.Id,
+                Name = user.UserName,
+                City = user.City,
+                Bio = user.Bio,
+                SkillLevel = user.SkillLevel,
+                Community = user.SkillCommunity == null ? null : new SkillCommunityDto
+                {
+                    Id = user.SkillCommunity.Id,
+                    Name = user.SkillCommunity.Name,
+                    Level = user.SkillCommunity.Level,
+                    CreatedAt = user.SkillCommunity.CreatedAt
+                }
+            };
         }
+
+
         public async Task<UserProfile?> FindUserByDbIdAsync(Guid userId)
         {
             return await _repository.FindUserByDbIdAsync(userId);

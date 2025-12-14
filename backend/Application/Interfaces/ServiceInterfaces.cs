@@ -5,9 +5,9 @@ namespace backend.Application.Interfaces
     public interface IUserProfileService
     {
         Task<UserProfile?> PostAndGetUserByKeycloakIdAsync(string keycloakId);
-        Task<UserProfile> UpdateProfileAsync(
+        Task<UserProfileResponseDto> UpdateProfileAsync(
             string keycloakId,
-            UpdateUserProfileDto dto,
+            UserProfileResponseDto dto,
             IFormFile? avatar
         );
         Task<UserProfile?> FindUserByDbIdAsync(Guid userId);
@@ -23,5 +23,9 @@ namespace backend.Application.Interfaces
         Task<ICollection<UserPostDto>> GetUserPostAsync(string keycloakId);
         Task<List<UserPostDto>> GetAllUsersPostsAsync();
          Task<ICollection<UserPostDto>>GetPostByUserId(Guid id);
+    }
+    public interface IUserSkillCommunity
+    {
+        Task AssignCommunityAsync(UserProfile userProfile );
     }
 }
