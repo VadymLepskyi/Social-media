@@ -28,6 +28,7 @@ namespace backend.Infrastructure.Repositories
                 UserId = p.UserProfileId.ToString(),
                 UserName = p.UserProfile?.UserName,
                 PostContent = p.PostContent,
+                 SkillLevel=p.UserProfile?.SkillLevel,
                 MediaUrl = p.PostMediaUrl,
                 CreatedAt = p.CreatedAt
             }).ToList();
@@ -42,6 +43,7 @@ namespace backend.Infrastructure.Repositories
                 UserId = p.UserProfile?.Id.ToString() ?? Guid.Empty.ToString(),
                 UserName = p.UserProfile?.UserName ?? "Unknown",
                 PostId = p.PostId.ToString(),
+                SkillLevel=p.UserProfile?.SkillLevel,
                 PostContent = p.PostContent,
                 CreatedAt = p.CreatedAt
             }).ToList();
@@ -55,6 +57,7 @@ namespace backend.Infrastructure.Repositories
                 PostId = p.PostId.ToString(),
                 UserId = p.UserProfileId.ToString(),
                 UserName = p.UserProfile?.UserName,
+                SkillLevel=p.UserProfile?.SkillLevel,
                 PostContent = p.PostContent,
                 MediaUrl = p.PostMediaUrl,
                 CreatedAt = p.CreatedAt

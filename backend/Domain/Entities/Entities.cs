@@ -12,7 +12,7 @@ namespace backend.Domain.Entities
         public SkillLevel SkillLevel { get; set; } 
         public Guid? SkillCommunityId{get;set;}
         public SkillCommunity? SkillCommunity{get;set;}
-        public ICollection<CommunityPost>? CommunityPosts {get;set;}=new List<CommunityPost>();
+        public ICollection<CommunityPost> CommunityPosts {get;set;}=new List<CommunityPost>();
 
         public ICollection<UserPost> Posts {get;set;}= new List<UserPost>();
         public string? ProfilePhotoUrl { get; set; }

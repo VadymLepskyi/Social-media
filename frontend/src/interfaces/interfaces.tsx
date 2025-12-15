@@ -21,7 +21,7 @@ export interface UserPostProps {
   userId: string;
   userName: string;
   postContent: string;
-  
+  skillLevel:string
   mediaUrl?: string;
   createdAt: string;
 }

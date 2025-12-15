@@ -23,6 +23,8 @@ namespace backend.Application.Interfaces
     public interface ICommunityPostRepository
     {
        Task<CommunityPost>AddUserPostAsync (CommunityPost userPost);
+       Task<List<CommunityPostDto>> GetAllUsersPostsAsync();
+       Task<ICollection<CommunityPostDto>>GetPostByUserId(Guid id);
         
     }
 

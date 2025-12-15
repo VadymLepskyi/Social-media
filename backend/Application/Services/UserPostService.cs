@@ -40,6 +40,7 @@ namespace backend.Application.Services
                 PostId = post.PostId.ToString(),
                 UserId = user.Id.ToString(),
                 UserName = user.UserName,
+                SkillLevel=user.SkillLevel,
                 PostContent = post.PostContent,
                 MediaUrl = post.PostMediaUrl,
                 CreatedAt = post.CreatedAt
@@ -56,7 +57,7 @@ namespace backend.Application.Services
         {
             return await _repository.GetAllUsersPostsAsync();
         }
-         public async Task<ICollection<UserPostDto>>GetPostByUserId(Guid id)
+        public async Task<ICollection<UserPostDto>>GetPostByUserId(Guid id)
         {
             return await _repository.GetPostByUserId(id);
         }

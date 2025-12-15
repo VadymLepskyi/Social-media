@@ -43,5 +43,13 @@ namespace backend.Application.Services
 
             return postDto;
         }
+        public async Task<List<CommunityPostDto>> GetAllUsersPostsAsync()
+        {
+            return await _repository.GetAllUsersPostsAsync();
+        }
+        public async Task<ICollection<CommunityPostDto>>GetPostByUserId(Guid id)
+        {
+            return await _repository.GetPostByUserId(id);
+        }
     }
 }

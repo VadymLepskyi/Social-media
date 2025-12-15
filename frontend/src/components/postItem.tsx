@@ -13,9 +13,9 @@ export default function PostItem({post}:{post:UserPostProps}) {
             <div className="flex items-center mb-3">
               <div className="w-8 h-8 bg-gray-200 rounded-full mr-3"></div>
               <Link to={`/profile/${post.userId}`} className="font-semibold text-padel-primary">{post.userName}</Link>
-              <p className="text-xs text-gray-500">{}</p>
               <span className="text-xs text-gray-400 ml-auto">{formattedDate}</span>
             </div>
+            <div><p className="text-xs text-gray-500">Player rating {post.skillLevel}</p></div>
             <p className="text-gray-700">{post.postContent}</p>
           </div>
         ); 
