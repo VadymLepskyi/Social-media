@@ -1,7 +1,5 @@
-using backend.Infrastructure.Data;
 using backend.Domain.Entities;
 using backend.API.DTOs;
-using backend.Domain.Enums;
 using backend.Application.Interfaces;
 namespace backend.Application.Services
 {

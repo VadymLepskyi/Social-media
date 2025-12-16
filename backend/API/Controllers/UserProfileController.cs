@@ -10,11 +10,6 @@ namespace backend.API.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileService _service;
-        // private string? Authorized()
-        // {
-        //     string id =User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-        //     return KeycloakId ?? "Keycloak Id not found";
-        // }
         private string? KeycloakId => User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
         public UserProfileController(IUserProfileService service)
         {
@@ -23,8 +18,7 @@ namespace backend.API.Controllers
         [HttpPost("updateProfile")]
         public async Task<IActionResult> UpdateProfile(
             [FromForm] UserProfileResponseDto dto,
-            [FromForm] IFormFile? avatar
-        )
+            [FromForm] IFormFile? avatar)
         {
             try
             {               

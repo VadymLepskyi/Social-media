@@ -42,7 +42,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "http://localhost:8080/realms/Padel";
+        options.Authority = "http://localhost:8080/realms/Padel Connect";
         options.Audience = "account";
         options.RequireHttpsMetadata = false;
     });

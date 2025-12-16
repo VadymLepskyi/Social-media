@@ -11,7 +11,7 @@ export default function Navigationar()
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
 
-    const keycloakBase = "http://localhost:8080/realms/Padel/protocol/openid-connect/logout";
+    const keycloakBase = "http://localhost:8080/realms/Padel Connect/protocol/openid-connect/logout";
     const redirectUri = encodeURIComponent("http://localhost:3000/");
     const clientId = "myclient";
     window.location.href = 
