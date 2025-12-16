@@ -18,34 +18,33 @@ namespace backend.Infrastructure.Repositories
            await _context.SaveChangesAsync();
             return communityPost;
         }
-        public async Task<List<CommunityPostDto>> GetAllUsersPostsAsync()
+        public async Task<List<CommunityPostDto>> GetUserCommunityPostsAsync(Guid userId)
         {
+            // Get the user's community ID
+            var userCommunityId = await _context.UserProfiles
+                .Where(u => u.Id == userId)
+                .Select(u => u.SkillCommunityId)
+                .FirstOrDefaultAsync();
+
+            if (userCommunityId == null)
+                return new List<CommunityPostDto>();
+
+            // Get posts from that community
             var posts = await _context.CommunityPosts
+                .Where(p => p.SkillCommunityId == userCommunityId)
                 .Include(p => p.UserProfile)
-                .ToListAsync(); 
-            return posts.Select(p => new CommunityPostDto
-            {
-                UserId = p.UserProfile?.Id.ToString() ?? Guid.Empty.ToString(),
-                UserName = p.UserProfile?.UserName ?? "Unknown",
-                PostId = p.Id.ToString(),
-                Content = p.Content,
-                CreatedAt = p.CreatedAt
-            }).ToList();
-        }
-        public async Task<ICollection<CommunityPostDto>>GetPostByUserId(Guid id)
-        {
-            var user= await _context.UserProfiles.Include(u=>u.CommunityPosts).FirstOrDefaultAsync(u=>u.Id==id)
-            ?? throw new Exception("User not found");
-            return user.CommunityPosts.Select(p=> new CommunityPostDto
-            {
-                PostId = p.Id.ToString(),
-                UserId = p.UserProfileId.ToString(),
-                UserName = p.UserProfile?.UserName,
-                Content = p.Content,
-                MediaUrl = p.MediaUrl,
-                CreatedAt = p.CreatedAt
-                
-            }).ToList();
+                .OrderByDescending(p => p.CreatedAt)
+                .Select(p => new CommunityPostDto
+                {
+                    UserId = p.UserProfile!.Id.ToString(),
+                    UserName = p.UserProfile!.UserName ?? "Unknown",
+                    SkillLevel=p.UserProfile!.SkillLevel,
+                    PostId = p.Id.ToString(),
+                    PostContent = p.Content,
+                    CreatedAt = p.CreatedAt
+                })
+                .ToListAsync();
+            return posts;
         }
     }
     

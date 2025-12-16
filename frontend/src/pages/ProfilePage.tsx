@@ -12,7 +12,7 @@ export default function Profile()
     return(
         <PageContainer title="Padel News">
                 <ProfileInfo userId={userId}/>
-                <CreateNewPost/>
+                <CreateNewPost page="ProfilePage"/>
                 <PostFeed post={post||[]} error={error} ></PostFeed>
         </PageContainer>
     );

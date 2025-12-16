@@ -1,9 +1,14 @@
 import {useState} from "react"
 import useCreateNewPost from "../hooks/useCreateNewPost"
-export default function CreateNewPost()
+type PostPage="ProfilePage"|"CommunityPage"
+interface CreateNewPostProps {
+    page: PostPage;
+}
+export default function CreateNewPost({ page }: CreateNewPostProps)
 {
+    
     const [message,setMessage]= useState("")
-    const {createNewPost}=useCreateNewPost();
+    const {createNewPost}=useCreateNewPost(page);
     const handlePost=()=>{
         createNewPost(message);
         setMessage('');

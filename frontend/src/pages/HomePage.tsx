@@ -2,7 +2,7 @@ import PageContainer from "../components/pageContainer";
 import PostFeed from "../components/postFeed";
 import useGetAllPosts from "../hooks/useGetAllPosts";
 export default function HomePage() {
-  const { posts, error } = useGetAllPosts();
+  const { posts, error } = useGetAllPosts("HomePage");
   return (
     <PageContainer title="Padel News">
       <PostFeed post={posts||[]} error={error}></PostFeed>

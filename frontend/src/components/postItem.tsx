@@ -1,6 +1,8 @@
 import {UserPostProps} from "../interfaces/interfaces"
 import { Link} from "react-router-dom";
-export default function PostItem({post}:{post:UserPostProps}) {
+
+export default function PostItem({post}:{post:UserPostProps}) 
+{
   const formattedDate = new Date(post.createdAt).toLocaleString("en-GB", {
           day: "2-digit",
           month: "short",
@@ -15,7 +17,8 @@ export default function PostItem({post}:{post:UserPostProps}) {
               <Link to={`/profile/${post.userId}`} className="font-semibold text-padel-primary">{post.userName}</Link>
               <span className="text-xs text-gray-400 ml-auto">{formattedDate}</span>
             </div>
-            <div><p className="text-xs text-gray-500">Player rating {post.skillLevel}</p></div>
+            <div><p className="text-xs text-gray-500">Player rating {post.skillLevel} </p></div>
+            
             <p className="text-gray-700">{post.postContent}</p>
           </div>
         ); 

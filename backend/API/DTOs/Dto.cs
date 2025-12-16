@@ -32,9 +32,10 @@ namespace backend.API.DTOs
         public class CommunityPostDto
     {
         public string? PostId { get; set; }
+        public SkillLevel? SkillLevel { get; set; }
         public string? UserName { get; set; }
         public string? UserId { get; set; }
-        public string? Content { get; set; } = string.Empty;
+        public string? PostContent { get; set; } = string.Empty;
         public string? MediaUrl { get; set; }
         public Guid? SkillCommunityId { get; set; }
         public DateTime CreatedAt { get; set; }

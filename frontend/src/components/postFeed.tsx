@@ -1,7 +1,8 @@
 import PostItem from "./postItem";
 import {PostFeedProps} from "../interfaces/interfaces"
 
-export default function PostFeed({ post, error }:PostFeedProps) {
+export default function PostFeed({ post, error }:PostFeedProps) 
+{
 
   if (error) return <p>Error: {error.message}</p>;
   if (!post) return <p>Loading...</p>;

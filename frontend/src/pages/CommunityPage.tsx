@@ -1,18 +1,15 @@
-import ProfileInfo from "../components/profileInfo"
 import CreateNewPost from "../components/createNewPost"
 import PageContainer from "../components/pageContainer";
 import PostFeed from "../components/postFeed"
-import usePost from "../hooks/useGetPost";
-import { useParams} from "react-router-dom"
+import useGetAllPosts from "../hooks/useGetAllPosts";
 
 export default function Profile()
 {  
-    const {userId}=useParams<{ userId: string }>();
-    const { post, error } = usePost(userId);
+    const { posts, error } = useGetAllPosts("CommunityPage");
     return(
         <PageContainer title="Community News">
-                <CreateNewPost/>
-                <PostFeed post={post||[]} error={error} ></PostFeed>
+                <CreateNewPost page="CommunityPage"/>
+                <PostFeed post={posts||[]} error={error} ></PostFeed>
         </PageContainer>
     );
 }

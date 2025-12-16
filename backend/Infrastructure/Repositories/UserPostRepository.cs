@@ -28,7 +28,7 @@ namespace backend.Infrastructure.Repositories
                 UserId = p.UserProfileId.ToString(),
                 UserName = p.UserProfile?.UserName,
                 PostContent = p.PostContent,
-                 SkillLevel=p.UserProfile?.SkillLevel,
+                SkillLevel=p.UserProfile?.SkillLevel,
                 MediaUrl = p.PostMediaUrl,
                 CreatedAt = p.CreatedAt
             }).ToList();

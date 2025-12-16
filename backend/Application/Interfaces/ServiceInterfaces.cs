@@ -31,7 +31,6 @@ namespace backend.Application.Interfaces
     public interface ICommunityPostInterface
     {
         Task<CommunityPostDto> CreateUserPostAsync (CommunityPostDto postDto,string keycloakId);
-        Task<List<CommunityPostDto>> GetAllUsersPostsAsync();
-        Task<ICollection<CommunityPostDto>>GetPostByUserId(Guid id);
+        Task<List<CommunityPostDto>> GetAllUsersPostsAsync(Guid id);
     }
 }

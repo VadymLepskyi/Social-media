@@ -10,10 +10,12 @@ namespace backend.API.Controllers
     public class CommunityPostController : ControllerBase
     {
         private readonly ICommunityPostInterface _service;
+        private readonly IUserProfileRepository _repository;
         private string? KeycloakId => User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-        public CommunityPostController( ICommunityPostInterface service)
+        public CommunityPostController( ICommunityPostInterface service, IUserProfileRepository repository)
         {
             _service = service;
+            _repository= repository;
         }
     [Authorize]
     [HttpPost("createPost")]
@@ -38,23 +40,15 @@ namespace backend.API.Controllers
         [Authorize]
         [HttpGet("retrieveUsersPosts")]
         public async Task<IActionResult> RetrieveUsersPosts()
-        {   
-            var posts = await _service.GetAllUsersPostsAsync();
-            return Ok(posts);
-        }
-        [Authorize]
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetPostByUserId(Guid userId)
         {
-            if (userId == Guid.Empty)
-                return BadRequest("Missing or invalid userId");
+            var keycloakId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (keycloakId == null) return Unauthorized();
 
-            var user = await _service.GetPostByUserId(userId);
-
+            var user = await _repository.GetByKeycloakIdAsync(keycloakId);
             if (user == null)
-                return NotFound("User not found");
-
-            return Ok(user);
+                return NotFound("User profile not found");
+            var posts = await _service.GetAllUsersPostsAsync(user.Id);
+            return Ok(posts);
         }
     }
 }

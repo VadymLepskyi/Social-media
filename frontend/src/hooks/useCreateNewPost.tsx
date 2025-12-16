@@ -1,14 +1,20 @@
 import keycloak from "../keycloak"
-export default function useCreateNewPost()
+type PostPage = "ProfilePage" | "CommunityPage";
+export default function useCreateNewPost(page:PostPage)
 {
     const createNewPost= async(message:string) => {
         try
         {
             const postData={PostContent: message}
-            const res = await fetch ("http://localhost:5145/api/UserPost/createPost",{
+            let url="";
+            if(page==="ProfilePage")
+                url="http://localhost:5145/api/UserPost/createPost"
+            if(page==="CommunityPage")
+                url="http://localhost:5145/api/CommunityPost/createPost"
+            const res = await fetch (url,{
                 method:"POST",
                 headers: {
-                    "Content-Type": "application/json", // <-- required for JSON
+                    "Content-Type": "application/json", 
                     Authorization: `Bearer ${keycloak.token}`,
                 },
                 body: JSON.stringify(postData)

@@ -2,6 +2,7 @@ using backend.Application.Interfaces;
 using backend.Domain.Entities;
 using backend.Infrastructure.Data;
 using backend.API.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace backend.Application.Services
@@ -10,46 +11,54 @@ namespace backend.Application.Services
     {
         private readonly ICommunityPostRepository _repository;
         private readonly IUserProfileRepository _profileRepo;
-        public CommunityPostService (ICommunityPostRepository repository,IUserProfileRepository profileRepo)
+        private readonly AppDbContext _context;
+        public CommunityPostService (ICommunityPostRepository repository,IUserProfileRepository profileRepo,AppDbContext context)
         {
             _repository= repository;
             _profileRepo=profileRepo;
+            _context = context;
         }
         public async Task<CommunityPostDto> CreateUserPostAsync(CommunityPostDto communityPostDto, string keycloakId)
         {
             var user = await _profileRepo.GetByKeycloakIdAsync(keycloakId);
             if (user == null)
                 throw new Exception("User not found");
-            if (string.IsNullOrWhiteSpace(communityPostDto.Content))
+            if (string.IsNullOrWhiteSpace(communityPostDto.PostContent))
                 throw new Exception("Post content is required");
+
+            // Get the community the user belongs to
+            var community = await _context.SkillCommunities
+                .Where(sc => sc.Members.Any(m => m.Id == user.Id))
+                .FirstOrDefaultAsync();
+
+            if (community == null)
+                throw new Exception("User does not belong to any community");
 
             var post = new CommunityPost
             {
                 Id = Guid.NewGuid(),
                 UserProfileId = user.Id,
-                Content = communityPostDto.Content,
+                Content = communityPostDto.PostContent,
+                SkillCommunityId = community.Id, // assign automatically
                 CreatedAt = DateTime.UtcNow,
             };
 
             await _repository.AddUserPostAsync(post);
 
-            // Return a DTO to avoid cycles
-            var postDto = new CommunityPostDto
+            return new CommunityPostDto
             {
-                SkillCommunityId=post.SkillCommunityId,
-                Content = post.Content,
+                SkillCommunityId = post.SkillCommunityId,
+                SkillLevel=user.SkillLevel,
+                PostContent = post.Content,
                 MediaUrl = post.MediaUrl,
+                PostId = post.Id.ToString(),
+                UserId = user.Id.ToString(),
+                UserName = user.UserName
             };
-
-            return postDto;
         }
-        public async Task<List<CommunityPostDto>> GetAllUsersPostsAsync()
+        public async Task<List<CommunityPostDto>> GetAllUsersPostsAsync(Guid id)
         {
-            return await _repository.GetAllUsersPostsAsync();
-        }
-        public async Task<ICollection<CommunityPostDto>>GetPostByUserId(Guid id)
-        {
-            return await _repository.GetPostByUserId(id);
+            return await _repository.GetUserCommunityPostsAsync( id);
         }
     }
 }

@@ -36,3 +36,6 @@ export interface PostFeedProps {
   error?: Error | null;
   loading?: boolean;
 }
+
+
+
