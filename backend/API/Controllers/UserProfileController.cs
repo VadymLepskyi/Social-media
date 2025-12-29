@@ -22,9 +22,6 @@ namespace backend.API.Controllers
         {
             try
             {               
-                Console.WriteLine($"KeycloakId: {KeycloakId}");
-                Console.WriteLine($"DTO Name: {dto?.Name}, City: {dto?.City}, Bio: {dto?.Bio}, Skill: {dto?.SkillLevel}");
-                Console.WriteLine($"Avatar file: {avatar?.FileName}");
                 if (KeycloakId == null) return Unauthorized("Keycloak Id not found");
                 if (dto == null)
                     return BadRequest("Missing profile data");

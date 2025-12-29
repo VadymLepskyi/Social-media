@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using backend.Infrastructure.Data;
-using backend.Application.Interfaces;  // for IUserProfileService
+using backend.Application.Interfaces;  
 using backend.Application.Services;
 using backend.Infrastructure.Repositories;
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")  // React app URL
+        policy.WithOrigins("http://localhost:3000")  
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -29,16 +29,12 @@ builder.Services.AddScoped<IUserSkillCommunity, UserSkillCommunity>();
 builder.Services.AddScoped<ICommunityPostRepository, CommunityPostRepository>();
 builder.Services.AddScoped<ICommunityPostInterface, CommunityPostService>();
 
-
-
-
 // PostgreSQL provider
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 /// The authentication srvice: Keycloak
-
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -48,7 +44,6 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Services.AddAuthorization();
-
 var app = builder.Build();
 
 // Add auth middleware

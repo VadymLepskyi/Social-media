@@ -56,7 +56,6 @@ namespace backend.Application.Services
             _repository.Update(user);
             await _repository.SaveChangesAsync();
 
-            // 🔴 MAP TO DTO (critical)
             return new UserProfileResponseDto
             {
                 Id = user.Id,
